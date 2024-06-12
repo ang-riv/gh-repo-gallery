@@ -7,14 +7,16 @@ const octokit = new Octokit({});
 const profileInfo = document.querySelector(".overview");
 // gh username
 const username = "ang-riv";
+// ul 
+const repoList = document.querySelector(".repo-list");
+
 
 //* async fcn to retrieve gh data
 const getGHData = async function () {
     // since this is already an object, don't need to convert to a json file?
     const ghData = await octokit.request('GET /users/{username}', {
         username: username,
-    })
-    //console.log(request);
+    });
 
     displayInfo(ghData);
     //return request;
@@ -22,6 +24,7 @@ const getGHData = async function () {
 
 getGHData();
 
+//* fcn to display user's profile info
 const displayInfo = function (objectData) {
     // retrieving specific user data
     const img = objectData.data.avatar_url;
@@ -47,5 +50,34 @@ const displayInfo = function (objectData) {
 
     // append to the overview div
     profileInfo.append(userInfo);
+    // fetch the repos
+    getRepos();
+}
 
+//* async fcn to fetch repos
+const getRepos = async function () {
+    const repoData = await octokit.request('GET /users/{username}/repos',{
+        username: username,
+        sort: "updated",
+        per_page: 100
+    });
+
+    displayRepoInfo(repoData);
+}
+
+//* fcn that displays the repos
+const displayRepoInfo = function(repos){
+    // loop through each repo
+    // access the array that contains all of the repos
+    const repoData = repos.data;
+    for(let singleRepo of repoData){
+        let repoNames = singleRepo.name;
+        // create a list item for each repo
+        let listItem = document.createElement("li");
+
+        // give them repo class and h3 with repo name
+        listItem.classList.add("repo");
+        listItem.innerHTML = `<h3>${repoNames}</h3>`;
+        repoList.append(listItem);
+    }
 }
