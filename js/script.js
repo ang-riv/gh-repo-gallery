@@ -9,7 +9,10 @@ const profileInfo = document.querySelector(".overview");
 const username = "ang-riv";
 // ul 
 const repoList = document.querySelector(".repo-list");
-
+// repo section
+const repoSection = document.querySelector(".repos");
+// individual repo data
+const individualRepoData = document.querySelector(".repo-data");
 
 //* async fcn to retrieve gh data
 const getGHData = async function () {
@@ -73,11 +76,33 @@ const displayRepoInfo = function(repos){
     for(let singleRepo of repoData){
         let repoNames = singleRepo.name;
         // create a list item for each repo
-        let listItem = document.createElement("li");
+        let repoItem = document.createElement("li");
 
         // give them repo class and h3 with repo name
-        listItem.classList.add("repo");
-        listItem.innerHTML = `<h3>${repoNames}</h3>`;
-        repoList.append(listItem);
+        repoItem.classList.add("repo");
+        repoItem.innerHTML = `<h3>${repoNames}</h3>`;
+        repoList.append(repoItem);
     }
+}
+
+//* event listener for clicking on each repo and displaying the repos info
+repoList.addEventListener("click", function(e) {
+    // check if the event target (element being clicked on) matches the h3 element
+    if(e.target.matches("h3")){
+        const repoName = e.target.innerText;
+        console.log(getSpecificRepoInfo(repoName));
+    }
+});
+
+//* async fcn to get specific repo info
+const getSpecificRepoInfo = async function (repoName) {
+    const specificRepoData = await octokit.request('GET /repos/{owner}/{repo}', {
+        owner: username,
+        repo: repoName
+    });
+
+    console.log(specificRepoData);
+
+    const fetchLanguages = specificRepoData.languages_url;
+    console.log(fetchLanguages);
 }
