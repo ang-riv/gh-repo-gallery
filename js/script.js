@@ -13,6 +13,10 @@ const repoList = document.querySelector(".repo-list");
 const repoSection = document.querySelector(".repos");
 // individual repo data
 const individualRepoData = document.querySelector(".repo-data");
+// back to gallery btn
+const backButton = document.querySelector(".view-repos");
+// selects the input in the search bar
+const filterInput = document.querySelector(".filter-repos");
 
 //* async fcn to retrieve gh data
 const getGHData = async function () {
@@ -71,6 +75,8 @@ const getRepos = async function () {
 
 //* fcn that displays the repos
 const displayRepoInfo = function(repos){
+    // show the input bar
+    filterInput.classList.remove("hide");
     // loop through each repo
     // access the array that contains all of the repos
     const repoData = repos.data;
@@ -124,6 +130,7 @@ const getSpecificRepoInfo = async function (repoName) {
     displaySpecificRepoInfo(specificRepoData, languages)
 }
 
+//* fcn that displays a specific repos info
 const displaySpecificRepoInfo = async function (repoInfo, languages) {
     // empty the section of all of the listed repos
     repoList.innerHTML = "";
@@ -144,5 +151,37 @@ const displaySpecificRepoInfo = async function (repoInfo, languages) {
     <p>Languages: ${languages.join(", ")}</p>
     <a class="visit" href="${url}" target="_blank" rel="noreferrer noopener">View Repo on GitHub!</a>`;
 
+    // add div to repo section
     repoSection.append(div);
+    // get rid of back button
+    backButton.classList.remove("hide");
 }
+
+//*! FIX LATER TO SHOW REPOS AGAIN AFTER CLICKING THE BUTTON
+//* event listener for back to repo button
+backButton.addEventListener("click", function () {
+    repoSection.classList.add("hide");
+    individualRepoData.classList.add("hide");
+    backButton.classList.add("hide");
+})
+
+filterInput.addEventListener("input", function (e) {
+    const searchText = e.target.value;
+    const lowercaseSearch = searchText.toLowerCase();
+    console.log(lowercaseSearch);
+    // select all the elements that have class of repo
+    const repos = document.querySelectorAll(".repo");
+
+    // loop through each repo inside of the repos element
+    for (let i = 0; i < repos.length; i++) {
+        const element = repos[i]; 
+        const repoNames = element.innerText;
+        const lowercaseRepo = repoNames.toLowerCase();
+        // if the lowercase repo text includes the lowercase search text like substrings from the last project, show the repo. if not, add hide to the classlist.
+        if(lowercaseRepo.includes(lowercaseSearch)){
+            element.classList.remove("hide");
+        } else {
+            element.classList.add("hide");
+        }
+    }
+})
