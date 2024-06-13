@@ -89,6 +89,7 @@ const displayRepoInfo = function(repos){
 repoList.addEventListener("click", function(e) {
     // check if the event target (element being clicked on) matches the h3 element
     if(e.target.matches("h3")){
+        // name of the repo
         const repoName = e.target.innerText;
         console.log(getSpecificRepoInfo(repoName));
     }
@@ -103,6 +104,44 @@ const getSpecificRepoInfo = async function (repoName) {
 
     console.log(specificRepoData);
 
-    const fetchLanguages = specificRepoData.languages_url;
-    console.log(fetchLanguages);
+    // grab the url
+    const fetchLanguages = await specificRepoData.data.languages_url;
+    // grab the data from the url
+    const languagesURL = await fetch(fetchLanguages);
+    // parse the languages in to json file
+    const languageData = await languagesURL.json();
+    
+    // add languages into an array
+    const languages = [];
+    for (const key in languageData) {
+        languages.push(key);
+    }
+
+
+    console.log(languages);
+    console.log(languageData);
+    displaySpecificRepoInfo(specificRepoData, languages)
+}
+
+const displaySpecificRepoInfo = async function (repoInfo, languages) {
+    // empty the section of all of the listed repos
+    repoList.innerHTML = "";
+
+    // get info
+    const data = repoInfo.data;
+    const name = data.name;
+    const description = data.description;
+    const defaultBranch = data.default_branch;
+    const url = data.url;
+
+    // create a new div
+    const div = document.createElement("div");
+    // populate the div
+    div.innerHTML = `<h3>Name: ${name}</h3>
+    <p>Description: ${description}</p>
+    <p>Default Branch: ${defaultBranch}</p>
+    <p>Languages: ${languages.join(", ")}</p>
+    <a class="visit" href="${url}" target="_blank" rel="noreferrer noopener">View Repo on GitHub!</a>`;
+
+    repoSection.append(div);
 }
