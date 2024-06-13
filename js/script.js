@@ -29,12 +29,13 @@ getGHData();
 
 //* fcn to display user's profile info
 const displayInfo = function (objectData) {
+    const data = objectData.data;
     // retrieving specific user data
-    const img = objectData.data.avatar_url;
-    const name = objectData.data.name;
-    const bio = objectData.data.bio;
-    const location = objectData.data.location;
-    const repos = objectData.data.public_repos;
+    const img = data.avatar_url;
+    const name = data.name;
+    const bio = data.bio;
+    const location = data.location;
+    const repos = data.public_repos;
 
     // new div that will contain the user's info
     let userInfo = document.createElement("div");
