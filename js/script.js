@@ -98,7 +98,7 @@ repoList.addEventListener("click", function(e) {
     if(e.target.matches("h3")){
         // name of the repo
         const repoName = e.target.innerText;
-        console.log(getSpecificRepoInfo(repoName));
+        getSpecificRepoInfo(repoName);
     }
 });
 
@@ -132,8 +132,8 @@ const getSpecificRepoInfo = async function (repoName) {
 
 //* fcn that displays a specific repos info
 const displaySpecificRepoInfo = async function (repoInfo, languages) {
-    // empty the section of all of the listed repos
-    repoList.innerHTML = "";
+    // empty the section where the individual repo data will be
+    individualRepoData.innerHTML = "";
 
     // get info
     const data = repoInfo.data;
@@ -151,16 +151,18 @@ const displaySpecificRepoInfo = async function (repoInfo, languages) {
     <p>Languages: ${languages.join(", ")}</p>
     <a class="visit" href="${url}" target="_blank" rel="noreferrer noopener">View Repo on GitHub!</a>`;
 
-    // add div to repo section
-    repoSection.append(div);
+    // add div to individual repo data
+    individualRepoData.append(div);
+
+    individualRepoData.classList.remove("hide");
+    repoSection.classList.add("hide");
     // get rid of back button
     backButton.classList.remove("hide");
 }
 
-//*! FIX LATER TO SHOW REPOS AGAIN AFTER CLICKING THE BUTTON
 //* event listener for back to repo button
 backButton.addEventListener("click", function () {
-    repoSection.classList.add("hide");
+    repoSection.classList.remove("hide");
     individualRepoData.classList.add("hide");
     backButton.classList.add("hide");
 })
