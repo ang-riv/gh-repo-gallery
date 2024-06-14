@@ -140,7 +140,7 @@ const displaySpecificRepoInfo = async function (repoInfo, languages) {
     const name = data.name;
     const description = data.description;
     const defaultBranch = data.default_branch;
-    const url = data.url;
+    const url = data.html_url;
 
     // create a new div
     const div = document.createElement("div");
@@ -167,6 +167,7 @@ backButton.addEventListener("click", function () {
     backButton.classList.add("hide");
 })
 
+//* event listener for dynamic search bar
 filterInput.addEventListener("input", function (e) {
     const searchText = e.target.value;
     const lowercaseSearch = searchText.toLowerCase();
