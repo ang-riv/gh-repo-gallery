@@ -8,4 +8,4 @@ A React app that displays all of my repos on Github using the Github REST API. C
 
 ## Deployment
 
-https://ang-riv.github.io/unplugged/
+https://ang-riv.github.io/gh-repo-gallery/
