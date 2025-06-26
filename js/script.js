@@ -70,14 +70,14 @@ const displayRepoInfo = function (repos) {
     let repoItem = document.createElement("li");
 
     repoItem.classList.add("repo");
-    repoItem.innerHTML = `<h3>${repoNames}</h3>`;
+    repoItem.innerHTML = `<h2>${repoNames}</h2>`;
     repoList.append(repoItem);
   }
 };
 
 //* event listener for clicking on each repo and displaying the repos info
 repoList.addEventListener("click", function (e) {
-  if (e.target.matches("h3")) {
+  if (e.target.matches("h2")) {
     const repoName = e.target.innerText;
     getSpecificRepoInfo(repoName);
   }
@@ -114,7 +114,7 @@ const displaySpecificRepoInfo = async function (repoInfo, languages) {
 
   const div = document.createElement("div");
   
-  div.innerHTML = `<h3>Name: ${name}</h3>
+  div.innerHTML = `<h2>Name: ${name}</h2>
     <p><strong>Description:</strong> ${description}</p>
     <p><strong>Default Branch:</strong> ${defaultBranch}</p>
     <p><strong>Languages:</strong> ${languages.join(", ")}</p>

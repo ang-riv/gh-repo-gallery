@@ -18,7 +18,7 @@
     />
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/styles.css" />
-    <script src="js/script.js" type="module" defer></script>
+    <script src="js/script.js" type="module"></script>
   </head>
 
   <body>
@@ -27,19 +27,21 @@
         <div class="circle"></div>
       </div>
       <h1><i class="fab fa-github-alt"></i> GitHub Repo Gallery</h1>
-      <section class="intro">
+      <div class="intro">
         <div class="overview"></div>
-      </section>
+      </div>
 
-      <section class="repos">
+      <div class="repos">
+        <label for="search"></label>
         <input
           type="text"
+          id="search"
           class="filter-repos hide"
           placeholder="Search by name"
         />
         <ul class="repo-list"></ul>
-      </section>
-      <section class="repo-data hide"></section>
+      </div>
+      <div class="repo-data hide"></div>
       <div class="button-container">
         <button class="view-repos hide">Back to Repo Gallery</button>
       </div>

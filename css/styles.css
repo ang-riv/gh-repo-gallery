@@ -76,10 +76,11 @@ h1 {
   margin-right: 8px;
 }
 
-h3 {
+h2 {
   width: 100%;
   text-align: center;
   color: #0b5394;
+  font-size: 1.17em;
 }
 
 ul {
@@ -176,13 +177,13 @@ section.repo-data {
   padding: 0.5em;
 }
 
-.repo-list h3 {
+.repo-list h2 {
   text-align: left;
   margin: 0;
   padding: 10px;
 }
 
-.repo-list h3:hover {
+.repo-list h2:hover {
   background-color: #e7f4ff;
   cursor: pointer;
 }
@@ -196,7 +197,7 @@ section.repo-data {
   width: 100%;
 }
 
-.repo-data h3 {
+.repo-data h2 {
   text-align: left;
 }
 
