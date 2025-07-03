@@ -18,7 +18,7 @@
     />
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/styles.css" />
-    <script src="js/script.js" type="module" defer></script>
+    <script src="js/script.js" type="module"></script>
   </head>
 
   <body>
@@ -28,10 +28,12 @@
       </div>
       <h1><i class="fab fa-github-alt"></i> GitHub Repo Gallery</h1>
       <section class="intro">
+        <h1 class="sr-only">User Introduction Section</h1>
         <div class="overview"></div>
       </section>
 
       <section class="repos">
+        <h2 class="sr-only">List of Repos and Search Section</h2>
         <label for="search" class="sr-only">Search repo by name: </label>
         <input
           type="text"
@@ -41,7 +43,7 @@
         />
         <ul class="repo-list"></ul>
       </section>
-      <section class="repo-data hide"></section>
+      <section class="repo-data hide"><h2 class="sr-only">Individual Repo Section</h2></section>
       <div class="button-container">
         <button class="view-repos hide">Back to Repo Gallery</button>
       </div>
